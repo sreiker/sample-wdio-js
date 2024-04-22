@@ -24,7 +24,6 @@ stages:
         displayName: 'Run a one-line script'
 
       - script: |
-          npm install
           npm run SingleAndroidWeb  
         displayName: 'Run a multi-line script'
       
