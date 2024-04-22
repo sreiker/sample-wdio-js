@@ -1,0 +1,50 @@
+schedules:
+- cron: '15 4 * * *'
+  displayName: Daily Webdriver.io run
+  branches:
+    include:
+    - master
+  always: true
+
+trigger:
+  - none
+
+variables:
+   ${{ if eq( variables['Build.Reason'], 'Schedule' ) }}:
+    testTenant: wallacecloud
+   ${{ if ne( variables['Build.Reason'], 'Schedule' ) }}:
+    testTenant: qacloud
+
+parameters:
+- name: tenant
+  displayName: Tenant
+  type: string
+  default: $(testTenant)
+
+name: WebdriverIO pipeline - $(Build.BuildId) - Tenant ${{ parameters.tenant }}
+appendCommitMessageToRunName: false
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Npm@1
+  displayName: npm install
+  inputs:
+    command: 'custom'
+    customCommand: 'install --production'
+
+- task: CmdLine@2
+  displayName: Webdriver.io Execution
+  inputs:
+    script: "npx wdio wdio.conf.lambdatest.ts"
+  env:
+    TENANT: ${{ parameters.tenant }}
+    LT_USERNAME: $(USERNAME)
+    LT_ACCESS_KEY: $(PASSWORD)
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: JUnit
+    testResultsFiles: 'reports/*.xml'
