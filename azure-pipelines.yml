@@ -13,17 +13,19 @@ stages:
   jobs:
   - job: BuildAndTestJob
     steps:
-    - task: configuration@1
-      inputs:
-        connection: 'sunil-test'
-        isTunnelActivate: false
-        isAppAutomate: false
-        isSmartUI: false
+      - task: configuration@1
+        inputs:
+           connection: 'sunil-test'
+           isTunnelActivate: false
+           isAppAutomate: false
+           isSmartUI: false
 
-    - script: npm install
-      displayName: 'Run a one-line script'
+      - script: npm install
+        displayName: 'Run a one-line script'
 
-    - script: |
-        npm run SingleAndroidWeb  
-      displayName: 'Run a multi-line script'
-    - task: LambdatestResults@1
+      - script: |
+          npm install
+          npm run SingleAndroidWeb  
+        displayName: 'Run a multi-line script'
+      
+      - task: LambdatestResults@1
