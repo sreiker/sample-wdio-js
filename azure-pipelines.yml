@@ -29,3 +29,10 @@ stages:
         displayName: 'Run a multi-line script'
       
       - task: LambdatestResults@1
+      
+- stage: LambdatestResults
+  jobs:
+  - job: LambdatestResultsJob
+    steps:
+      - script: |
+          echo "Hello"
