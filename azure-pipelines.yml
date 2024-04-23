@@ -52,7 +52,7 @@ name: WebdriverIO pipeline - $(Build.BuildId) - Tenant ${{ parameters.tenant }}
 appendCommitMessageToRunName: false
 
 pool:
-  vmImage: MylocalPool
+   MylocalPool
 
 steps:
 - task: Npm@1
