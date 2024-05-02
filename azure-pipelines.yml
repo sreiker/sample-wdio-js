@@ -9,22 +9,22 @@ trigger:
 pool:
   MylocalPool
 
-steps:
-  - script: npm install
-    displayName: 'Run a one-line script'
+# steps:
+#   - script: npm install
+#     displayName: 'Run a one-line script'
     
-  - task: configuration@1
-    inputs:
-        connection: 'sunil-test'
-        isTunnelActivate: false
-        isAppAutomate: false
-        isSmartUI: false
+#   - task: configuration@1
+#     inputs:
+#         connection: 'sunil-test'
+#         isTunnelActivate: false
+#         isAppAutomate: false
+#         isSmartUI: false
 
-  - script: |
-      npm run SingleAndroidWeb  
-      displayName: 'Run a multi-line script'
+#   - script: |
+#       npm run SingleAndroidWeb  
+#       displayName: 'Run a multi-line script'
       
-  - task: LambdatestResults@1
+#   - task: LambdatestResults@1
 # schedules:
 # - cron: '15 4 * * *'
 #   displayName: Daily Webdriver.io run
@@ -42,11 +42,11 @@ steps:
 #    ${{ if ne( variables['Build.Reason'], 'Schedule' ) }}:
 #     testTenant: qacloud
 
-# parameters:
-# - name: tenant
-#   displayName: Tenant
-#   type: string
-#   default: $(testTenant)
+parameters:
+- name: tenant
+  displayName: Tenant
+  type: string
+  default: tester
 
 # name: WebdriverIO pipeline - $(Build.BuildId) - Tenant ${{ parameters.tenant }}
 # appendCommitMessageToRunName: false
@@ -54,41 +54,42 @@ steps:
 # pool:
 #    MylocalPool
 
-# steps:
-# - task: Npm@1
-#   displayName: npm install
-#   inputs:
-#     command: 'custom'
-#     customCommand: 'install --production'
-# - task: configuration@1
-#   inputs:
-#     connection: 'sunil-test'
-#     isTunnelActivate: false
-#     isAppAutomate: false
-#     isSmartUI: false
+steps:
+- task: Npm@1
+  displayName: npm install
+  inputs:
+    command: 'custom'
+    customCommand: 'install --production'
+- task: configuration@1
+  inputs:
+    connection: 'sunil-test'
+    isTunnelActivate: false
+    isAppAutomate: false
+    isSmartUI: false
 
-# - task: Cmdline@2
-#   displayName: install
-#   inputs:
-#     script: |
-#        npm install
-#        npm run SingleAndroidWeb  
-#        displayName: 'Run a multi-line script'
+- task: Cmdline@2
+  displayName: install
+  inputs:
+    script: |
+       npm install
+       npm run SingleAndroidWeb  
+       displayName: 'Run a multi-line script'
 
-# - task: LambdatestResults@1
-# # - task: CmdLine@2
-# #   displayName: Webdriver.io Execution
-# #   inputs:
-# #     script: "npx wdio wdio.conf.lambdatest.ts"
-# #   env:
-# #     TENANT: ${{ parameters.tenant }}
-# #     LT_USERNAME: $(USERNAME)
-# #     LT_ACCESS_KEY: $(PASSWORD)
+- task: CmdLine@2
+  displayName: Webdriver.io Execution
+  inputs:
+    script: "npx wdio wdio.conf.lambdatest.ts"
+  env:
+    TENANT: ${{ parameters.tenant }}
+    # LT_USERNAME: 
+    # LT_ACCESS_KEY: 
 
-# - task: PublishTestResults@2
-#   condition: succeededOrFailed()
-#   inputs:
-#     testRunner: JUnit
-#     testResultsFiles: 'reports/*.xml'
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: JUnit
+    testResultsFiles: 'reports/*.xml'
+- task: LambdatestResults@1
+
 
       
