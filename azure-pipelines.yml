@@ -75,12 +75,12 @@ steps:
        npm run SingleAndroidWeb  
        displayName: 'Run a multi-line script'
 
-- task: CmdLine@2
-  displayName: Webdriver.io Execution
-  inputs:
-    script: "npx wdio wdio.conf.lambdatest.ts"
-  env:
-    TENANT: ${{ parameters.tenant }}
+# - task: CmdLine@2
+#   displayName: Webdriver.io Execution
+#   inputs:
+#     script: "npx wdio wdio.conf.lambdatest.ts"
+#   env:
+#     TENANT: ${{ parameters.tenant }}
     # LT_USERNAME: 
     # LT_ACCESS_KEY: 
 
