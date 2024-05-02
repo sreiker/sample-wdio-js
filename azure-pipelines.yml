@@ -3,92 +3,92 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-# trigger:
-# - main
-
-# pool:
-#   MylocalPool
-
-# steps:
-#   - script: npm install
-#     displayName: 'Run a one-line script'
-    
-#   - task: configuration@1
-#     inputs:
-#         connection: 'sunil-test'
-#         isTunnelActivate: false
-#         isAppAutomate: false
-#         isSmartUI: false
-
-#   - script: |
-#       npm run SingleAndroidWeb  
-#       displayName: 'Run a multi-line script'
-      
-#   - task: LambdatestResults@1
-schedules:
-- cron: '15 4 * * *'
-  displayName: Daily Webdriver.io run
-  branches:
-    include:
-    - master
-  always: true
-
 trigger:
-  - none
-
-variables:
-   ${{ if eq( variables['Build.Reason'], 'Schedule' ) }}:
-    testTenant: wallacecloud
-   ${{ if ne( variables['Build.Reason'], 'Schedule' ) }}:
-    testTenant: qacloud
-
-parameters:
-- name: tenant
-  displayName: Tenant
-  type: string
-  default: $(testTenant)
-
-name: WebdriverIO pipeline - $(Build.BuildId) - Tenant ${{ parameters.tenant }}
-appendCommitMessageToRunName: false
+- main
 
 pool:
-   MylocalPool
+  MylocalPool
 
 steps:
-- task: Npm@1
-  displayName: npm install
-  inputs:
-    command: 'custom'
-    customCommand: 'install --production'
-- task: configuration@1
-  inputs:
-    connection: 'sunil-test'
-    isTunnelActivate: false
-    isAppAutomate: false
-    isSmartUI: false
+  - script: npm install
+    displayName: 'Run a one-line script'
+    
+  - task: configuration@1
+    inputs:
+        connection: 'sunil-test'
+        isTunnelActivate: false
+        isAppAutomate: false
+        isSmartUI: false
 
-- task: Cmdline@2
-  displayName: install
-  inputs:
-    script: |
-       npm install
-       npm run SingleAndroidWeb  
-       displayName: 'Run a multi-line script'
+  - script: |
+      npm run SingleAndroidWeb  
+      displayName: 'Run a multi-line script'
+      
+  - task: LambdatestResults@1
+# schedules:
+# - cron: '15 4 * * *'
+#   displayName: Daily Webdriver.io run
+#   branches:
+#     include:
+#     - master
+#   always: true
 
-- task: LambdatestResults@1
-# - task: CmdLine@2
-#   displayName: Webdriver.io Execution
+# trigger:
+#   - none
+
+# variables:
+#    ${{ if eq( variables['Build.Reason'], 'Schedule' ) }}:
+#     testTenant: wallacecloud
+#    ${{ if ne( variables['Build.Reason'], 'Schedule' ) }}:
+#     testTenant: qacloud
+
+# parameters:
+# - name: tenant
+#   displayName: Tenant
+#   type: string
+#   default: $(testTenant)
+
+# name: WebdriverIO pipeline - $(Build.BuildId) - Tenant ${{ parameters.tenant }}
+# appendCommitMessageToRunName: false
+
+# pool:
+#    MylocalPool
+
+# steps:
+# - task: Npm@1
+#   displayName: npm install
 #   inputs:
-#     script: "npx wdio wdio.conf.lambdatest.ts"
-#   env:
-#     TENANT: ${{ parameters.tenant }}
-#     LT_USERNAME: $(USERNAME)
-#     LT_ACCESS_KEY: $(PASSWORD)
+#     command: 'custom'
+#     customCommand: 'install --production'
+# - task: configuration@1
+#   inputs:
+#     connection: 'sunil-test'
+#     isTunnelActivate: false
+#     isAppAutomate: false
+#     isSmartUI: false
 
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testRunner: JUnit
-    testResultsFiles: 'reports/*.xml'
+# - task: Cmdline@2
+#   displayName: install
+#   inputs:
+#     script: |
+#        npm install
+#        npm run SingleAndroidWeb  
+#        displayName: 'Run a multi-line script'
+
+# - task: LambdatestResults@1
+# # - task: CmdLine@2
+# #   displayName: Webdriver.io Execution
+# #   inputs:
+# #     script: "npx wdio wdio.conf.lambdatest.ts"
+# #   env:
+# #     TENANT: ${{ parameters.tenant }}
+# #     LT_USERNAME: $(USERNAME)
+# #     LT_ACCESS_KEY: $(PASSWORD)
+
+# - task: PublishTestResults@2
+#   condition: succeededOrFailed()
+#   inputs:
+#     testRunner: JUnit
+#     testResultsFiles: 'reports/*.xml'
 
       
