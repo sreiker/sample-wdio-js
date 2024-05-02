@@ -67,13 +67,9 @@ steps:
     isAppAutomate: false
     isSmartUI: false
 
-- task: Cmdline@2
-  displayName: install
-  inputs:
-    script: |
-       npm install
-       npm run SingleAndroidWeb  
-       displayName: 'Run a multi-line script'
+- script: |
+      npm run SingleAndroidWeb  
+      displayName: 'Run a multi-line script'
 
 # - task: CmdLine@2
 #   displayName: Webdriver.io Execution
