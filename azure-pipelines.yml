@@ -64,8 +64,8 @@ steps:
   inputs:
     connection: 'sunil-test'
     isTunnelActivate: false
-    isAppAutomate: false
-    isSmartUI: false
+    # isAppAutomate: false
+    # isSmartUI: false
 
 - script: |
       npm run SingleAndroidWeb  
