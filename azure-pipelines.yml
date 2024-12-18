@@ -63,7 +63,7 @@ steps:
 - task: configuration@1
   inputs:
     connection: 'sunil-test'
-    isTunnelActivate: false
+    isTunnelActivate: true
     # isAppAutomate: false
     # isSmartUI: false
 
