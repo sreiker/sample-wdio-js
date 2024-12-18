@@ -67,6 +67,10 @@ steps:
     # isAppAutomate: false
     # isSmartUI: false
 
+
+- script: |
+      npm i wdio-lambdatest-service --save-dev
+      displayName: 'service initlaiztion'
 - script: |
       npm run SingleAndroidWeb  
       displayName: 'Run a multi-line script'
