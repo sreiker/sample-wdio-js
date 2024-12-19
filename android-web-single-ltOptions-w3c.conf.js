@@ -1,10 +1,10 @@
 exports.config = {
-    // user: "sunilr",//process.env.LT_USERNAME || "YOUR_USERNAME",
-    // key: "LtQPqIWXiN4kHjRSQ9juzDmQZV7tpbssbvyEJ13JPS4QfhGduU",//process.env.LT_ACCESS_KEY || "YOUR_ACCESS_KEY",
+    user: "sunilr",//process.env.LT_USERNAME || "YOUR_USERNAME",
+    key: "LtQPqIWXiN4kHjRSQ9juzDmQZV7tpbssbvyEJ13JPS4QfhGduU",//process.env.LT_ACCESS_KEY || "YOUR_ACCESS_KEY",
   
 
-    user: "varunkumarb",//process.env.LT_USERNAME || "YOUR_USERNAME",
-    key: "GhGShOYHz1jODWE9qDvkJK4nPDR3n2lc0gNp9VknalhwtUineG",//process.env.LT_ACCESS_KEY || "YOUR_ACCESS_KEY",
+    // user: "varunkumarb",//process.env.LT_USERNAME || "YOUR_USERNAME",
+    // key: "GhGShOYHz1jODWE9qDvkJK4nPDR3n2lc0gNp9VknalhwtUineG",//process.env.LT_ACCESS_KEY || "YOUR_ACCESS_KEY",
   
     updateJob: false,
     specs: ["android-web-test.js"],
