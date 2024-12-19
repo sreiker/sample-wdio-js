@@ -29,7 +29,7 @@ exports.config = {
 
      services: [
         ['lambdatest', {
-            tunnel: true,verbose: true
+            tunnel: true
         }]
     ],
     logLevel: "info",
