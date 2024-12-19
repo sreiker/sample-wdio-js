@@ -60,10 +60,16 @@ steps:
   inputs:
     command: 'custom'
     customCommand: 'install --production'
+# - task: configuration@1
+#   inputs:
+#     connection: 'sunil-test'
+#     isTunnelActivate: false
 - task: configuration@1
   inputs:
-    connection: 'sunil-test'
+    connection: 'vanneet-connection'
     isTunnelActivate: false
+    isAppAutomate: false
+    isSmartUI: false
     # isAppAutomate: false
     # isSmartUI: false
 
