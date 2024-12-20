@@ -17,6 +17,8 @@ exports.config = {
   
     capabilities: [
       {
+          username:user,
+            accessKey:key,
         "lt:options": {
           platformName: "Android",
           deviceName: ".*",
@@ -25,9 +27,8 @@ exports.config = {
           enableCustomTranslation: true,
           w3c: true,
           build: process.env.LT_BUILD_NAME,
-        tunnel: true,
-username:user,
-accesskey:key
+            tunnel: true,
+
         }
       },
     ],
