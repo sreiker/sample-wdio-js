@@ -26,6 +26,8 @@ exports.config = {
           w3c: true,
           build: process.env.LT_BUILD_NAME,
         tunnel: true,
+username:user,
+accesskey:key
         }
       },
     ],
