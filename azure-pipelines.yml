@@ -66,8 +66,8 @@ steps:
 #     isTunnelActivate: false
 - task: configuration@1
   inputs:
-    connection: 'vanneet-connection'
-    isTunnelActivate: true
+    connection: 'sunil-test'
+    isTunnelActivate: false
     isAppAutomate: false
     isSmartUI: false
     # isAppAutomate: false
