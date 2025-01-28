@@ -17,6 +17,8 @@ exports.config = {
   
     capabilities: [
       {
+	"browserName": "Chrome",
+	"browserVersion": "132.0",
         "lt:options": {
           platformName: "Android",
           deviceName: ".*",
