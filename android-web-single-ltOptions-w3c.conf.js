@@ -1,6 +1,6 @@
 exports.config = {
-    user: process.env.LT_USERNAME || "sunilr",
-    key: process.env.LT_ACCESS_KEY || "LtQPqIWXiN4kHjRSQ9juzDmQZV7tpbssbvyEJ13JPS4QfhGduU",
+    user:  "sunilr"|| process.env.LT_USERNAME ,
+    key:  "LtQPqIWXiN4kHjRSQ9juzDmQZV7tpbssbvyEJ13JPS4QfhGduU" ||process.env.LT_ACCESS_KEY ,
   
 
     // user: "varunkumarb",//process.env.LT_USERNAME || "YOUR_USERNAME",
