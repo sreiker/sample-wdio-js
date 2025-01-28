@@ -17,8 +17,6 @@ exports.config = {
   
     capabilities: [
       {
-          username:user,
-            accessKey:key,
         "lt:options": {
           platformName: "Android",
           deviceName: ".*",
