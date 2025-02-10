@@ -1,46 +1,118 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# # Starter pipeline
+# # Start with a minimal pipeline that you can customize to build and deploy your code.
+# # Add steps that build, run tests, deploy, and more:
+# # https://aka.ms/yaml
 
+# trigger:
+# - main
+
+# pool:
+#   MylocalPool
+
+# # steps:
+# #   - script: npm install
+# #     displayName: 'Run a one-line script'
+    
+# #   - task: configuration@1
+# #     inputs:
+# #         connection: 'sunil-test'
+# #         isTunnelActivate: false
+# #         isAppAutomate: false
+# #         isSmartUI: false
+
+# #   - script: |
+# #       npm run SingleAndroidWeb  
+# #       displayName: 'Run a multi-line script'
+      
+# #   - task: LambdatestResults@1
+# # schedules:
+# # - cron: '15 4 * * *'
+# #   displayName: Daily Webdriver.io run
+# #   branches:
+# #     include:
+# #     - master
+# #   always: true
+
+# # trigger:
+# #   - none
+
+# # variables:
+# #    ${{ if eq( variables['Build.Reason'], 'Schedule' ) }}:
+# #     testTenant: wallacecloud
+# #    ${{ if ne( variables['Build.Reason'], 'Schedule' ) }}:
+# #     testTenant: qacloud
+
+# parameters:
+# - name: tenant
+#   displayName: Tenant
+#   type: string
+#   default: tester
+
+# # name: WebdriverIO pipeline - $(Build.BuildId) - Tenant ${{ parameters.tenant }}
+# # appendCommitMessageToRunName: false
+
+# # pool:
+# #    MylocalPool
+
+# steps:
+# - task: Npm@1
+#   displayName: npm install
+#   inputs:
+#     command: 'custom'
+#     customCommand: 'install --production'
+# # - task: configuration@1
+# #   inputs:
+# #     connection: 'sunil-test'
+# #     isTunnelActivate: false
+# - task: configuration@1
+#   inputs:
+#     connection: 'sunil-test'
+#     isTunnelActivate: false
+#     isAppAutomate: false
+#     isSmartUI: false
+#     # isAppAutomate: false
+#     # isSmartUI: false
+
+
+# - script: |
+#       npm i wdio-lambdatest-service --save-dev
+#       displayName: 'service initlaiztion'
+# - script: |
+#       npm run SingleAndroidApp  
+#       displayName: 'Run a multi-line script'
+
+# # - task: CmdLine@2
+# #   displayName: Webdriver.io Execution
+# #   inputs:
+# #     script: "npx wdio wdio.conf.lambdatest.ts"
+# #   env:
+# #     TENANT: ${{ parameters.tenant }}
+#     # LT_USERNAME: 
+#     # LT_ACCESS_KEY: 
+
+# - task: PublishTestResults@2
+#   condition: succeededOrFailed()
+#   inputs:
+#     testRunner: JUnit
+#     testResultsFiles: 'reports/*.xml'
+# - task: LambdatestResults@1
+
+
+      
 trigger:
 - main
 
 pool:
-  MylocalPool
+  name: MylocalPool
 
-# steps:
-#   - script: npm install
-#     displayName: 'Run a one-line script'
-    
-#   - task: configuration@1
-#     inputs:
-#         connection: 'sunil-test'
-#         isTunnelActivate: false
-#         isAppAutomate: false
-#         isSmartUI: false
-
-#   - script: |
-#       npm run SingleAndroidWeb  
-#       displayName: 'Run a multi-line script'
-      
-#   - task: LambdatestResults@1
-# schedules:
-# - cron: '15 4 * * *'
-#   displayName: Daily Webdriver.io run
-#   branches:
-#     include:
-#     - master
-#   always: true
-
-# trigger:
-#   - none
-
-# variables:
-#    ${{ if eq( variables['Build.Reason'], 'Schedule' ) }}:
-#     testTenant: wallacecloud
-#    ${{ if ne( variables['Build.Reason'], 'Schedule' ) }}:
-#     testTenant: qacloud
+# Schedule to trigger every 5 minutes
+schedules:
+- cron: '*/5 * * * *'  # This will run every 5 minutes
+  displayName: 'Run every 5 minutes'
+  branches:
+    include:
+    - main
+  always: true
 
 parameters:
 - name: tenant
@@ -48,54 +120,46 @@ parameters:
   type: string
   default: tester
 
-# name: WebdriverIO pipeline - $(Build.BuildId) - Tenant ${{ parameters.tenant }}
-# appendCommitMessageToRunName: false
+- name: tag_to_run
+  displayName: Tag to run
+  type: string
+  default: '@android_smoke'
 
-# pool:
-#    MylocalPool
+# Uncomment to include manual trigger with inputs
+# workflow_dispatch:
+#   inputs:
+#     tag_to_run:
+#       description: 'Tag to run on the test'
+#       required: true
+#       default: '@android_smoke'
 
 steps:
 - task: Npm@1
-  displayName: npm install
+  displayName: 'npm install'
   inputs:
     command: 'custom'
     customCommand: 'install --production'
-# - task: configuration@1
-#   inputs:
-#     connection: 'sunil-test'
-#     isTunnelActivate: false
+
 - task: configuration@1
   inputs:
     connection: 'sunil-test'
     isTunnelActivate: false
     isAppAutomate: false
     isSmartUI: false
-    # isAppAutomate: false
-    # isSmartUI: false
-
 
 - script: |
       npm i wdio-lambdatest-service --save-dev
-      displayName: 'service initlaiztion'
+  displayName: 'service initialization'
+
 - script: |
-      npm run SingleAndroidApp  
-      displayName: 'Run a multi-line script'
+      npm run SingleAndroidApp -- --mochaOpts.grep="${{ parameters.tag_to_run }}"
+  displayName: 'Run tests on the app with the tag'
 
-# - task: CmdLine@2
-#   displayName: Webdriver.io Execution
-#   inputs:
-#     script: "npx wdio wdio.conf.lambdatest.ts"
-#   env:
-#     TENANT: ${{ parameters.tenant }}
-    # LT_USERNAME: 
-    # LT_ACCESS_KEY: 
-
+# Publish test results
 - task: PublishTestResults@2
   condition: succeededOrFailed()
   inputs:
     testRunner: JUnit
     testResultsFiles: 'reports/*.xml'
+
 - task: LambdatestResults@1
-
-
-      
