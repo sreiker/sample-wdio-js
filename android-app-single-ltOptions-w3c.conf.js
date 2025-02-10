@@ -6,11 +6,11 @@ exports.config = {
     specs: ["android-test.js"],
     exclude: [],
   
-    commonCapabilities: {
-      build: "LT_Appium_NodeJS_WebDriverIO_ltoptions_w3_App_Automation",
-      devicelog: true,
-      visual: true,  
-    },
+    // commonCapabilities: {
+    //   build: "LT_Appium_NodeJS_WebDriverIO_ltoptions_w3_App_Automation",
+    //   devicelog: true,
+    //   visual: true,  
+    // },
   
     capabilities: [
       {
@@ -21,6 +21,9 @@ exports.config = {
           app: process.env.LT_APP_ID||"lt://proverbial-android",
           platformName: "Android",
           enableCustomTranslation: true,
+    build: "LT_Appium_NodeJS_WebDriverIO_ltoptions_w3_App_Automation",
+      devicelog: true,
+      visual: true
         }
       },
     ],
