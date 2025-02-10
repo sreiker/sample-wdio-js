@@ -28,6 +28,11 @@ exports.config = {
       },
     ],
   
+  services: [
+        ['lambdatest', {
+            tunnel: false
+        }]
+    ],
     logLevel: "info",
     coloredLogs: true,
     screenshotPath: "./errorShots/",
