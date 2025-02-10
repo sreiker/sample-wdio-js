@@ -78,7 +78,7 @@ steps:
       npm i wdio-lambdatest-service --save-dev
       displayName: 'service initlaiztion'
 - script: |
-      npm run SingleAndroidWeb  
+      npm run SingleAndroidApp  
       displayName: 'Run a multi-line script'
 
 # - task: CmdLine@2
