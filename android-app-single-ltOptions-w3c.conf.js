@@ -1,5 +1,5 @@
 exports.config = {
-    user:"sunilr" || process.env.LT_USERNAME",
+    user:"sunilr" || process.env.LT_USERNAME,
     key: "LtQPqIWXiN4kHjRSQ9juzDmQZV7tpbssbvyEJ13JPS4QfhGduU" || process.env.LT_ACCESS_KEY ,
   
     updateJob: false,
