@@ -1,6 +1,6 @@
 exports.config = {
-    user:  "prashant.lambdatest"|| process.env.LT_USERNAME ,
-    key:  "YuDpYjVBdTk4pCFolaZy5qeDw1okeZx20ta4U92YJO8PHE4EgA" ||process.env.LT_ACCESS_KEY ,
+    user:  "sunilr"|| process.env.LT_USERNAME ,
+    key:  "LtQPqIWXiN4kHjRSQ9juzDmQZV7tpbssbvyEJ13JPS4QfhGduU" ||process.env.LT_ACCESS_KEY ,
   
 
     // user: "varunkumarb",//process.env.LT_USERNAME || "YOUR_USERNAME",
