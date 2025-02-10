@@ -1,7 +1,8 @@
 {
   "name": "webdriverio-appium-app",
   "scripts": {
-    "SingleAndroidWeb": "node_modules\\.bin\\wdio android-web-single-ltOptions-w3c.conf.js"
+    "SingleAndroidWeb": "node_modules\\.bin\\wdio android-web-single-ltOptions-w3c.conf.js",
+"SingleAndroidApp": "node_modules\\.bin\\wdio android-app-single-ltOptions-w3c.conf.js --mochaOpts.grep='@android_smoke'"
   },
   "dependencies": {
     "@wdio/cli": "^8.36.0",
