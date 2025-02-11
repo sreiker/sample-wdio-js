@@ -106,13 +106,13 @@ pool:
   name: MylocalPool
 
 # Schedule to trigger every 5 minutes
-schedules:
-- cron: '*/5 * * * *'  # This will run every 5 minutes
-  displayName: 'Run every 5 minutes'
-  branches:
-    include:
-    - main
-  always: true
+# schedules:
+# - cron: '*/5 * * * *'  # This will run every 5 minutes
+#   displayName: 'Run every 5 minutes'
+#   branches:
+#     include:
+#     - main
+#   always: true
 
 parameters:
 - name: tenant
