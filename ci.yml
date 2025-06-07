@@ -30,4 +30,4 @@ jobs:
           npm i
           npm install
           npm i wdio-lambdatest-service --save-dev
-          npm run single
+          npm run SingleAndroidWeb
