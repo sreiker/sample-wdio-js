@@ -24,9 +24,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - run: |
-          cd web_io
-          npm install selenium-webdriver 
-          npm install webdriverio
           npm i
           npm install
           npm i wdio-lambdatest-service --save-dev
