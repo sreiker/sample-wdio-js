@@ -13,8 +13,8 @@ jobs:
         node-version: [16.x]
         
     env:
-      LT_USERNAME: "ritamg"  # Set your desired environment variable here
-      LT_ACCESS_KEY: "unknown"
+      LT_USERNAME: "sunilr"  # Set your desired environment variable here
+      LT_ACCESS_KEY: "LtQPqIWXiN4kHjRSQ9juzDmQZV7tpbssbvyEJ13JPS4QfhGduU"
 
     steps:
     - uses: actions/checkout@v2
