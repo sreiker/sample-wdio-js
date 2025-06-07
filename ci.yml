@@ -1,0 +1,33 @@
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        
+    env:
+      LT_USERNAME: "ritamg"  # Set your desired environment variable here
+      LT_ACCESS_KEY: "unknown"
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: |
+          cd web_io
+          npm install selenium-webdriver 
+          npm install webdriverio
+          npm i
+          npm install
+          npm i wdio-lambdatest-service --save-dev
+          npm run single
