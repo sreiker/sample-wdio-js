@@ -23,6 +23,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Display run_id
+      run: echo "The GitHub run ID is $GITHUB_RUN_ID"
+
     - run: |
           npm i
           npm install
